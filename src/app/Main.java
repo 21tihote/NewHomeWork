@@ -1,17 +1,23 @@
-package model;
+package app;
+
+import library.Library;
+import model.Book;
+import model.Fiction;
+import model.Textbook;
+import users.User;
 
 public class Main {
     public static void main(String[] args) {
-        // Передаём числовой id и строку name
-        Author author = new Author(1, "Толстой");
+        Library library = new Library();
+        User alice = new User("Alice");
 
-        // Используем конкретный класс, а не абстрактный Book
-        Book book = new FictionBook(1, "Война и мир", author);
+        Book book1 = new Fiction("Война и мир");
+        Book book2 = new Textbook("Математика 10 класс");
 
-        System.out.println(book);
+        library.addBook(book1);
+        library.addBook(book2);
 
-        // Если есть класс FictionBook, можно создать и вывести его тоже
-        // FictionBook fnBook = new FictionBook(...);
-        // System.out.println(fnBook);
+        library.rentBook(alice, book1);
+        System.out.println(alice.getRentedBooks().get(0).getTitle()); // Война и мир
     }
 }
